@@ -1,62 +1,31 @@
 import java.util.Scanner;
 
-public class Main
-{
-    public static Employee createEmployee()
-    {
-        System.out.println("Enter the name of the Employee to register into the System");
-        Scanner scanner=new Scanner(System.in);
-        String employeeName=scanner.next();
-        System.out.println("Enter Pan Card details of the employee");
-        int panCardNo=scanner.nextInt();
-        System.out.println("Generate a pin for the employee");
-        int pin=scanner.nextInt();
-
-        Employee employee=new Employee(employeeName,panCardNo,pin);
-        return  employee;
-
-    }
-
-    public static String enterDeleteEmployeeName()
-    {
-        System.out.println("Select the name of the employee you want to delete from system: ");
-        Scanner scanner=new Scanner(System.in);
-        String empName=scanner.next();
-        return empName;
-    }
-    public static void main(String[] args)
-    {
-        int menuNumber;
-        Bank bank = new Bank();
-        System.out.println("Welcome to : " + bank.bankName);
-
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("Welcome to "+ Bank.bankName);
+        int userRole = 0;
         Scanner scanner = new Scanner(System.in);
-                do
-                    {
-                        System.out.println("Select an option: \n 1. Add Employee\n 2. Delete Employee\n 3. Exit");
-                    menuNumber= scanner.nextInt();
+        do {
+            System.out.println("Please Select your options \n 1. Login as Manager \n 2. Login as Employee \n 3. Login as Customer \n 4. exit");
+            userRole = scanner.nextInt();
 
-                    switch (menuNumber)
-                    {
-                        case 1:
-                        {
-                            bank.addEmployee(createEmployee());
-                            break;
-                        }
-                        case 2:
-                        {
-                            bank.deleteEmployee(enterDeleteEmployeeName());
-                            break;
-                        }
-                    }
-                    }
-                while (menuNumber<3);
+            switch (userRole) {
+                case 1:
+                    Bank.loginAsManager();
+                    break;
+                case 2:
+                    Employee.loginAsEmployee();
+                    break;
+                case 3:
+                    Customer.loginAsCustomer();
+                    break;
+                case 4:
+                    System.out.println("See you again");
+                    break;
+                default:
+                    System.out.println("Invalid Entry, try again");
 
-                System.out.println("thanks");
-
-
-
-
-
+            }
+        } while (userRole <1 || userRole >4);
     }
 }
